@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `<app-nav>
+    <router-outlet></router-outlet>
+  </app-nav>`
 })
 export class AppComponent {
   title = 'cadastroProduto';

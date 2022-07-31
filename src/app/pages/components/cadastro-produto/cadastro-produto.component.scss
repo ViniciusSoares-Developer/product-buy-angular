@@ -1,0 +1,29 @@
+.form {
+  padding: 0.5rem !important;
+}
+label {
+  font-weight: bold;
+  span {
+    color: red;
+  }
+}
+section {
+  margin: 1rem 0;
+}
+.btn {
+  background-color: green;
+  color: white;
+  box-shadow: -0.1rem 0.1rem 0 0.2rem rgb(0, 66, 0);
+}
+.table-container {
+  thead{
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }
+  max-height: 500px;
+  overflow-y: auto;
+  th{
+    cursor: pointer;
+  }
+}

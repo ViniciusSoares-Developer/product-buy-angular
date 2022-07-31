@@ -1,0 +1,67 @@
+<div class="form">
+  <div class="container-fluid row">
+    <div class="col-6">
+      <section class="row">
+        <label for="">Nome: <span>*</span></label>
+        <input type="text" [(ngModel)]="produto.nome" />
+      </section>
+      <section class="row">
+        <label class="col">R$</label>
+        <input type="number" step="0.1" min="0" class="col-5" [(ngModel)]="produto.preco" />
+        <select class="col-6" [(ngModel)]="produto.tipo">
+          <option value="">==Tipo==</option>
+        </select>
+      </section>
+      <section class="row">
+        <label for="">Descrição do valor: <span>*</span></label>
+        <input type="text" placeholder="Ifood" [(ngModel)]="produto.descricao"/>
+      </section>
+      <section class="row">
+        <label for="">Quantidade: <span>*</span></label>
+        <input type="number" min="0" [(ngModel)]="produto.quantidade"/>
+      </section>
+      <section class="row">
+        <label for="">Telefone: <span>*</span></label>
+        <input type="text" maxlength="11" [(ngModel)]="produto.telefone" />
+      </section>
+      <section class="row">
+        <label for="">Data: <span>*</span></label>
+        <input type="date" [(ngModel)]="produto.data" />
+      </section>
+      <section>
+        <button class="btn" (click)="addProduct()">Salvar</button>
+      </section>
+    </div>
+    <div class="col-6">
+      <app-chart-cadastro></app-chart-cadastro>
+    </div>
+  </div>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="sortList('tipo')">Tipo</th>
+          <th (click)="sortList('nome')">Nome</th>
+          <th (click)="sortList('preco')">Preço</th>
+          <th (click)="sortList('descricao')">Descrição</th>
+          <th (click)="sortList('quantidade')">Quantidade</th>
+          <th (click)="sortList('telefone')">Telefone</th>
+          <th (click)="sortList('data')">Data</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list; index as i">
+          <td>{{item.tipo}}</td>
+          <td>{{item.nome}}</td>
+          <td>{{item.preco}}</td>
+          <td>{{item.descricao}}</td>
+          <td>{{item.quantidade}}</td>
+          <td>{{item.telefone}}</td>
+          <td>{{item.data}}</td>
+          <td><button (click)="sellProduct(i)" [disabled]="item.quantidade == 0">Vender</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
