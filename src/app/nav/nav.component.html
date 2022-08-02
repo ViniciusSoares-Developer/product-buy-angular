@@ -3,11 +3,11 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+    <mat-toolbar>Colaboradores</mat-toolbar>
+    <mat-nav-list class="p-3">
+      <img class="w-100" src="https://www.pitang.com/image/layout_set_logo?img_id=64051&t=1648734708816" alt="Pitang - Logo">
+      <img class="w-100" src="http://www.facepe.br/wp-content/uploads/2014/04/Marca-FACEPE.png" alt="Facepe - Logo">
+      <img class="w-100" src="https://scontent.frec43-1.fna.fbcdn.net/v/t1.6435-9/38612119_2033275906921104_8048583664038051840_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=_-Ihs-JC4rsAX9LGn_u&_nc_ht=scontent.frec43-1.fna&oh=00_AT83vyklQOXL2yeEULbwHmhiBebGNyjiZkhIc2NfvSIkSA&oe=630D5B3A" alt="ETE José Joaquim da Silva Filho - Logo">
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -16,11 +16,10 @@
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>cadastroProduto</span>
+      <span>Cadastro Produto</span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
