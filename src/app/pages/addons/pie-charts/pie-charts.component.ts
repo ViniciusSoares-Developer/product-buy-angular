@@ -1,39 +1,29 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Produto } from 'src/app/interfaces/produto';
 
-
 @Component({
-  selector: 'app-chart-cadastro',
-  templateUrl: './chart-cadastro.component.html',
-  styleUrls: ['./chart-cadastro.component.scss']
+  selector: 'app-pie-charts',
+  templateUrl: './pie-charts.component.html',
+  styleUrls: ['./pie-charts.component.scss']
 })
-export class ChartCadastroComponent implements OnInit{
+export class PieChartsComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   private saida: number = 0;
   private entrada: number = 0;
   private quantidade: number = 0;
 
-  public barChartLegend = false;
-  public barChartPlugins = [];
-
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['Entrada', 'Saída', 'Quantidade'],
-    datasets: [
-      { data: [],
-        hoverBackgroundColor: 'rgba(0,140,0,0.3)',
-        backgroundColor: 'rgba(0,140,0,0.6)',
-        borderWidth: 2,
-        borderColor: 'rgba(0,140,0,0.6)',
-        hoverBorderColor: 'yellow',
-      }]
-  };
-
-  public barChartOptions: ChartOptions = {
+  public pieChartOptions: ChartOptions<'pie'> = {
     responsive: false,
   };
+  public pieChartLabels = [ 'Entrada', 'Saida', 'Quantidade' ];
+  public pieChartDatasets = [ {
+    data: [0]
+  } ];
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
 
   ngOnInit(): void {
     setInterval(() => { this.update(); }, 500);
@@ -41,7 +31,7 @@ export class ChartCadastroComponent implements OnInit{
   
   public update(): void {
     this.dataRequest();
-    this.barChartData.datasets[0].data = [this.entrada, this.saida, this.quantidade];
+    this.pieChartDatasets[0].data = [this.entrada, this.saida, this.quantidade];
     this.chart?.update();
   } 
 

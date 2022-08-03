@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, ViewChild } from '@angular/core';
 import { Produto } from 'src/app/interfaces/produto';
 
 @Component({
@@ -7,70 +7,71 @@ import { Produto } from 'src/app/interfaces/produto';
   styleUrls: ['./cadastro-produto.component.scss'],
 })
 export class CadastroProdutoComponent implements DoCheck {
+  @ViewChild("form") form: any;
 
-  public entrada: number = Number(localStorage.getItem('entrada') || '0');
-  public saida: number = Number(localStorage.getItem('saida') || '0');
   public list: Array<Produto> = JSON.parse(
     localStorage.getItem('list') || '[]'
   );
-  public produto: Produto = {
+  public types: Array<string> = [
+    'Entrada',
+    'Saida',
+    'Quantidade'
+  ]
+  public item: Produto = {
     nome: '',
     preco: 0,
     tipo: '',
     descricao: '',
     quantidade: 0,
     telefone: '',
-    data: '',
+    data: ''
   };
-  public types: Array<string> = [
-    'Comida',
-    'Acessorio',
-    'Roupa',
-    'Banho',
-    'Utencilio',
-    'Eletronico',
-    'Produto de beleza',
-    'Artigos de decoração'
-  ]
+  public edit: boolean = false;
+  public id: number = -1;
 
   constructor() {}
+  
   ngDoCheck(): void {
     this.list = JSON.parse(localStorage.getItem('list') || '[]');
-    this.entrada = Number(localStorage.getItem('entrada') || '0');
-    this.saida = Number(localStorage.getItem('saida') || '0');
     this.list = this.list.sort((a, b) => {
-      return b.quantidade - a.quantidade;
+      return a.quantidade - b.quantidade;
     });
   }
-  public addProduct(): void {
-    if(
-      this.produto.data &&
-      this.produto.descricao &&
-      this.produto.preco &&
-      this.produto.nome &&
-      this.produto.telefone &&
-      this.produto.quantidade &&
-      this.produto.tipo
-    ){
-      this.list.push(this.produto);
-      localStorage.setItem('list', JSON.stringify(this.list));
-      localStorage.setItem('entrada', String(this.entrada+1));
-      this.produto.data = ''
-      this.produto.descricao = ''
-      this.produto.preco = 0
-      this.produto.nome = ''
-      this.produto.telefone = ''
-      this.produto.quantidade = 0
-      this.produto.tipo = ''
-    }
-    else{
-      window.alert('Digite todos os valores para poder salvar')
-    }
+  public addProduct(form: Produto): void {
+      if(this.form.valid){
+        this.list.push(form);
+        localStorage.setItem('list', JSON.stringify(this.list));
+        this.clearForm();
+      }else{
+        window.alert("digite")
+      }
   }
   
-  public sellProduct(index: number): void {
-    this.list[index].quantidade -= 1;
+  public deleteProduct(index: number): void {
+    this.list.splice(index, 1);
     localStorage.setItem('list', JSON.stringify(this.list));
-    localStorage.setItem('saida', String(this.saida+1));
+  }
+  
+  public editProduct(event:string, index: number): void {
+    if(event == 'editar'){
+      this.item.nome = this.list[index].nome;
+      this.item.tipo = this.list[index].tipo;
+      this.item.preco = this.list[index].preco;
+      this.item.quantidade = this.list[index].quantidade;
+      this.item.descricao = this.list[index].descricao;
+      this.item.telefone = this.list[index].telefone;
+      this.item.data = this.list[index].data;
+      this.id = index;
+      this.edit = true;
+    }else if(event == 'confirmar' && this.id > -1){
+      this.list[this.id] = this.form.value;
+      localStorage.setItem('list', JSON.stringify(this.list));
+      this.edit = false;
+      this.clearForm();
+    }
+  }
+
+  public clearForm(): void {
+    this.form.reset();
   }
 }
