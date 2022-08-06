@@ -1,9 +1,14 @@
 .form {
   padding: 0.5rem !important;
 }
+.form-container{
+  border-radius: 0.2rem;
+  box-shadow: 0 0 1rem black;
+  margin: 1rem;
+}
 label {
   font-weight: bold;
-  span:not(.price) {
+  span:not(.sem-destaque) {
     color: red;
   }
   .price{
@@ -53,6 +58,6 @@ section {
 @media (min-width: 700px)
 {
   form {
-    width: 50%;
+    width: 100%;
   }
 }

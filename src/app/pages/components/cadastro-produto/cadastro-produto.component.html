@@ -1,170 +1,129 @@
 <div class="form">
   <div class="container">
-    <div class="row d-flex justify-content-center">
-      <form #form="ngForm">
-        <label class="col-12 m-2">
-          <span>*</span> Nome:
-          <input
-            class="w-100"
-            type="text"
-            name="nome"
-            [(ngModel)]="item.nome"
-            required
-          />
-        </label>
-        <label class="row col-12 m-2">
-          <span class="col-1 price">R$</span>
-          <input
-            class="col-5"
-            type="number"
-            name="preco"
-            [(ngModel)]="item.preco"
-            required
-          />
-          <select
-            class="col-6"
-            name="tipo"
-            [(ngModel)]="item.tipo"
-            required
-          >
-            <option value="">Selecione o tipo</option>
-            <option *ngFor="let type of types" [value]="type">
-              {{ type }}
-            </option>
-          </select>
-        </label>
-        <label class="col-12 m-2">
-          <span>*</span> Descrição do valor:
-          <input
-            class="w-100"
-            type="text"
-            name="descricao"
-            [(ngModel)]="item.descricao"
-            required
-          />
-        </label>
-        <label class="col-12 m-2">
-          <span>*</span> Quantidade:
-          <input
-            class="w-100"
-            type="number"
-            name="quantidade"
-            [(ngModel)]="item.quantidade"
-            required
-          />
-        </label>
-        <label class="col-12 m-2">
-          <span>*</span> Telefone:
-          <input
-            class="w-100"
-            type="text"
-            name="telefone"
-            [(ngModel)]="item.telefone"
-            required
-          />
-        </label>
-        <label class="col-12 m-2">
-          <span>*</span> Data:
-          <input
-            class="w-100"
-            type="date"
-            name="data"
-            [(ngModel)]="item.data"
-            required
-          />
-        </label>
-        <!-- <p>{{form.value | json}}</p> -->
-        <input
-          *ngIf="!edit"
-          (click)="addProduct(form.value)"
-          class="btn btn-outline-success m-2"
-          type="submit"
-        />
-        <div *ngIf="edit">
-          <input
-            (click)="editProduct('confirmar', -1)"
-            class="btn btn-outline-success m-2"
-            type="submit"
-            value="Editar"
-            />
-          <input
-          (click)="edit = false; clearForm()"
-          class="btn btn-outline-warning m-2"
-          type="submit"
-          value="Cancelar"
-          />
-        </div>
-      </form>
+    <div class="row">
+      <div class="form-container row">
+        <form #formFornecedor="ngForm">
+          <p>Informações do fornecedor</p>
+          <section>
+          <label class="col-12 m-2">
+            <span>*</span> Nome:
+            <input class="w-100" name="nome_fornecedor" value="nome" type="text" [(ngModel)]="item.nome_fornecedor">
+          </label>
+            <label class="row col-12 m-2">
+              <select class="col-5" name="uf" [(ngModel)]="item.endereco.uf" required>
+                <option value="">Selecione seu UF</option>
+                <option *ngFor="let estado of estates" [value]="estado.nome">{{estado.UF}}</option>
+              </select>
+              <span class="sem-destaque col-1"><span>*</span> Cidade:</span>
+              <input class="col-6" type="text" name="cidade" [(ngModel)]="item.endereco.cidade" required>
+            </label>
+            <label class="col-12 m-2">
+              <span>*</span> Bairro:
+              <input class="w-100" type="text" name="bairro" [(ngModel)]="item.endereco.bairro" required>
+            </label>
+            <label class="col-12 m-2">
+              <span>*</span> Endereço
+              <input class="w-100" type="text" name="endereco" [(ngModel)]="item.endereco.endereco" required>
+            </label>
+          </section>
+        </form>
+      </div>
+      <div class="form-container row">
+        <p>Informações do produto</p>
+        <form #form="ngForm">
+          <label class="col-12 m-2">
+            <span>*</span> Nome:
+            <input class="w-100" type="text" name="nome" [(ngModel)]="item.nome" required />
+          </label>
+          <label class="row col-12 m-2">
+            <span class="col-1 sem-destaque price">R$</span>
+            <input class="col-5" type="number" name="preco" [(ngModel)]="item.preco" required />
+            <select class="col-6" name="tipo" [(ngModel)]="item.tipo" required>
+              <option value="">Selecione o tipo</option>
+              <option *ngFor="let type of types" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+          </label>
+          <label class="col-12 m-2">
+            <span>*</span> Descrição do valor:
+            <input class="w-100" type="text" name="descricao" [(ngModel)]="item.descricao" required />
+          </label>
+          <label class="col-12 m-2">
+            <span>*</span> Quantidade:
+            <input class="w-100" type="number" name="quantidade" [(ngModel)]="item.quantidade" required />
+          </label>
+          <label class="col-12 m-2">
+            <span>*</span> Telefone:
+            <input class="w-100" type="text" name="telefone" [(ngModel)]="item.telefone" required />
+          </label>
+          <label class="col-12 m-2">
+            <span>*</span> Data:
+            <input class="w-100" type="date" name="data" [(ngModel)]="item.data" required />
+          </label>
+        </form>
+      </div>
+      <input *ngIf="!edit" (click)="addProduct()" class="btn btn-outline-success m-2" type="submit" />
+      <div *ngIf="edit">
+        <input (click)="editProduct('confirmar', -1)" class="btn btn-outline-success m-2" type="submit"
+          value="Editar" />
+        <input (click)="edit = false; clearForm()" class="btn btn-outline-warning m-2" type="submit" value="Cancelar" />
+      </div>
     </div>
-  </div>
-  <div class="row col table-container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Tipo</th>
-          <th>Nome</th>
-          <th>Preço</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Telefone</th>
-          <th>Data</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of list; index as i">
-          <td>{{ item.tipo }}</td>
-          <td>{{ item.nome }}</td>
-          <td>{{ item.preco }}</td>
-          <td>{{ item.descricao }}</td>
-          <td>{{ item.quantidade }}</td>
-          <td>{{ item.telefone }}</td>
-          <td>{{ item.data }}</td>
-          <td class="d-flex justify-content-center">
-            <button (click)="editProduct('editar', i)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-pencil-square"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                />
-              </svg>
-            </button>
-            <button (click)="deleteProduct(i)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-trash"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                />
-              </svg>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="row col table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Telefone</th>
+            <th>Data</th>
+            <th>Fornecedor</th>
+            <th>Endereco</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list; index as i">
+            <td>{{ item.tipo }}</td>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.preco }}</td>
+            <td>{{ item.descricao }}</td>
+            <td>{{ item.quantidade }}</td>
+            <td>{{ item.telefone }}</td>
+            <td>{{ item.data }}</td>
+            <td>{{ item.nome_fornecedor }}</td>
+            <td>{{ item.endereco.endereco }}({{item.endereco.bairro}}), {{item.endereco.cidade}}, {{item.endereco.uf}}</td>
+            <td class="d-flex justify-content-center">
+              <button (click)="editProduct('editar', i)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                  <path fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                </svg>
+              </button>
+              <button (click)="deleteProduct(i)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                  <path fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <hr>
   <div class="row m-0">
     <app-chart-cadastro class="d-flex justify-content-center"></app-chart-cadastro>
     <app-pie-charts class="d-flex justify-content-center"></app-pie-charts>
   </div>
-</div>
