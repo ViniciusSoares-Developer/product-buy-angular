@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { LayoutModule } from '@angular/cdk/layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -25,15 +25,16 @@ import { HomeComponent } from './pages/components/home/home.component';
     HomeComponent,
     InputOutputGraphicComponent,
     AmountGraphicComponent,
-    ProviderGraphicsComponent
+    ProviderGraphicsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
     BrowserAnimationsModule,
-    NgApexchartsModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgApexchartsModule
     
   ],
   providers: [],
