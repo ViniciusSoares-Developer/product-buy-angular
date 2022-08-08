@@ -1,0 +1,60 @@
+<form #formProduct="ngForm">
+  <h3>Produto</h3>
+  <label>
+    <span>*</span> Nome:
+    <input type="text" name="name" [(ngModel)]="product.name" required />
+  </label>
+  <label>
+    <span class="price">
+      <span>R$</span>
+      <input
+        class="not-width-full"
+        type="number"
+        name="price"
+        [(ngModel)]="product.price"
+        required
+      />
+      <select
+        class="not-width-full"
+        name="type"
+        [(ngModel)]="product.type"
+        required
+      >
+        <option value="">Selecione o tipo</option>
+        <option *ngFor="let type of types" [value]="type">
+          {{ type }}
+        </option>
+      </select>
+    </span>
+  </label>
+  <label>
+    <span>*</span> Descrição do valor:
+    <input
+      type="text"
+      name="description"
+      [(ngModel)]="product.description"
+      required
+    />
+  </label>
+  <label>
+    <span>*</span> Quantidade:
+    <input type="number" name="amount" [(ngModel)]="product.amount" required />
+  </label>
+  <label>
+    <span>*</span> Telefone:
+    <input type="text" name="phone" [(ngModel)]="product.phone" required />
+  </label>
+  <label>
+    <span>*</span> Data:
+    <input type="date" name="date" [(ngModel)]="product.date" required />
+  </label>
+  <label>
+    <span>*</span> Provedor:
+    <select name="provider" [(ngModel)]="product.provider" required>
+      <option value="-1">Selecione um Provedor</option>
+      <option *ngFor="let provider of providers; index as i;" [value]="i">{{provider.name}}</option>
+    </select>
+  </label>
+  <input *ngIf="!edit" class="btn btn-danger" (click)="sendData(formProduct.value)" type="submit" value="Salvar">
+  <ng-content></ng-content>
+</form>

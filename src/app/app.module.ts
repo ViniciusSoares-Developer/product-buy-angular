@@ -4,28 +4,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgChartsModule } from 'ng2-charts';
+
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChartCadastroComponent } from './pages/addons/chart-cadastro/chart-cadastro.component';
-import { PieChartsComponent } from './pages/addons/pie-charts/pie-charts.component';
-import { CadastroProdutoComponent } from './pages/components/cadastro-produto/cadastro-produto.component';
+import { AmountGraphicComponent } from './pages/addons/amount-graphic/amount-graphic.component';
+import { InputOutputGraphicComponent } from './pages/addons/input-output-graphic/input-output-graphic.component';
+import { ProviderGraphicsComponent } from './pages/addons/provider-graphics/provider-graphics.component';
+import { FormProductComponent } from './pages/components/form-product/form-product.component';
+import { FormProviderComponent } from './pages/components/form-provider/form-provider.component';
 import { HeaderComponent } from './pages/components/header/header.component';
+import { HomeComponent } from './pages/components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CadastroProdutoComponent,
-    ChartCadastroComponent,
-    PieChartsComponent,
     HeaderComponent,
+    FormProductComponent,
+    FormProviderComponent,
+    HomeComponent,
+    InputOutputGraphicComponent,
+    AmountGraphicComponent,
+    ProviderGraphicsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
     BrowserAnimationsModule,
-    NgChartsModule,
+    NgApexchartsModule,
     FormsModule,
     
   ],

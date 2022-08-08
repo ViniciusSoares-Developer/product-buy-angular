@@ -1,6 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.chart-container{
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
+}
+
+form {
+    box-sizing: border-box;
+  min-width: 450px;
+  h3 {
+    color: red;
+    text-align: center;
+  }
+  @media screen and (max-width: 768px) {
+    border-bottom: 0.2rem solid red;
+    padding: 1rem;
+  }
+  @media screen and (min-width: 768px) {
+    box-shadow: 0 0 0.5rem red;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+  }
+}
+
+label {
+  width: 100%;
+  margin-bottom: 1rem;
+  span:not(.not-mark) {
+    color: red;
+  }
+  .price {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    span {
+      color: white;
+      background-color: gray;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 10%;
+      border-radius: 0.3rem 0 0 0.3rem;
+      border: 0.1rem solid black;
+      border-right: none;
+      box-sizing: border-box;
+    }
+    :nth-child(2),
+    :nth-child(3) {
+      width: 100%;
+    }
+  }
+}
+
+input,
+select {
+  &:not(.not-width-full, [type="submit"]) {
+    width: 100%;
+  }
+  outline: none;
+}
